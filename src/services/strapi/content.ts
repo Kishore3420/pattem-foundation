@@ -72,4 +72,4 @@ export class StrapiContentService {
 
 // Example usage:
 // const blogService = new StrapiContentService('blogs');
-// const posts = await blogService.getAll({ populate: 'deep' }); 
+// const posts = await blogService.getAll({ populate: 'deep' });

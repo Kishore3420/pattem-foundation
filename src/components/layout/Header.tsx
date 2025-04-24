@@ -21,7 +21,7 @@ export const Header = () => {
             </Link>
           </div>
           <div className="hidden md:flex md:items-center md:space-x-6">
-            {navigation.map((item) => (
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -55,4 +55,4 @@ export const Header = () => {
       </nav>
     </header>
   );
-}; 
+};
