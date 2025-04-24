@@ -40,7 +40,7 @@ const defaultCauses: Cause[] = [
 
 export const Causes = ({ causes = defaultCauses }: CausesProps) => {
   return (
-    <section className="bg-white py-24 sm:py-32">
+    <section className="bg-white py-24 sm:py-32" role="region" aria-label="Our Causes">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -77,7 +77,12 @@ export const Causes = ({ causes = defaultCauses }: CausesProps) => {
                   <p className="mt-5 text-sm leading-6 text-gray-600">{cause.description}</p>
                 </div>
                 <div className="mt-6">
-                  <Button variant="primary">Donate Now</Button>
+                  <Button
+                    variant="primary"
+                    data-testid={`donate-button-${cause.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    Donate Now
+                  </Button>
                 </div>
               </div>
             </article>

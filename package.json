@@ -20,7 +20,7 @@
     "test:coverage:file": "jest --coverage --config jest.config.js",
     "lint:file": "eslint --fix",
     "format:file": "prettier --write",
-    "sonar": "echo 'Skipping Sonar for now'",
+    "sonar": "sonar-scanner",
     "quality": "npm run lint:check && npm run test:coverage && npm run format:check",
     "quality:file": "npm run lint:file && npm run test:file && npm run format:file",
     "precommit": "npm run quality",
@@ -83,6 +83,7 @@
     "next": "^15.3.1",
     "postcss": "^8.5.3",
     "prettier": "^3.2.5",
+    "sonarqube-scanner": "^4.3.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
