@@ -15,6 +15,89 @@ A modern Next.js application with TypeScript, Tailwind CSS, Strapi CMS integrati
 - **Commit Linting**: Commitlint
 - **Code Analysis**: SonarQube
 
+## 💻 Developer Setup
+
+### Required Tools
+
+#### For Mac Users
+
+1. **Node.js & npm**
+
+   - Install using [Homebrew](https://brew.sh/):
+     ```bash
+     brew install node
+     ```
+   - Or download from [Node.js website](https://nodejs.org/)
+
+2. **Git**
+
+   - Install using Homebrew:
+     ```bash
+     brew install git
+     ```
+   - Or download from [Git website](https://git-scm.com/)
+
+3. **VS Code** (Recommended IDE)
+
+   - Download from [VS Code website](https://code.visualstudio.com/)
+   - Recommended Extensions:
+     - ESLint
+     - Prettier
+     - Tailwind CSS IntelliSense
+     - TypeScript and JavaScript Language Features
+     - GitLens
+     - Jest Runner
+
+4. **Docker** (Optional, for Strapi)
+   - Install using Homebrew:
+     ```bash
+     brew install --cask docker
+     ```
+
+#### For Windows Users
+
+1. **Node.js & npm**
+
+   - Download from [Node.js website](https://nodejs.org/)
+   - Or use [Chocolatey](https://chocolatey.org/):
+     ```bash
+     choco install nodejs
+     ```
+
+2. **Git**
+
+   - Download from [Git website](https://git-scm.com/)
+   - Or use Chocolatey:
+     ```bash
+     choco install git
+     ```
+
+3. **VS Code** (Recommended IDE)
+
+   - Download from [VS Code website](https://code.visualstudio.com/)
+   - Same recommended extensions as Mac
+
+4. **Docker** (Optional, for Strapi)
+   - Download from [Docker website](https://www.docker.com/products/docker-desktop)
+
+### Alternative Tools
+
+1. **IDE Alternatives**
+
+   - WebStorm (Paid)
+   - Sublime Text
+   - Atom
+
+2. **Package Managers**
+
+   - Yarn
+   - pnpm
+
+3. **Version Control**
+   - GitHub Desktop
+   - GitKraken
+   - SourceTree
+
 ## 📋 Prerequisites
 
 - Node.js 18.x or later
@@ -91,6 +174,35 @@ src/
 ```
 
 ## 🎯 Development Workflow
+
+### Code Quality Tools
+
+1. **ESLint & Prettier**
+
+   - Automatic formatting on save (VS Code)
+   - Pre-commit hooks for formatting
+   - Consistent code style across the project
+
+2. **Husky & lint-staged**
+
+   - Pre-commit hooks for:
+     - Code formatting
+     - Linting
+     - Running tests
+   - Pre-push hooks for:
+     - Quality checks
+     - Test coverage
+
+3. **Commitlint**
+
+   - Enforces conventional commit messages
+   - Format: `<type>(<scope>): <description>`
+   - Types: feat, fix, docs, style, refactor, test, chore
+
+4. **SonarQube**
+   - Code quality analysis
+   - Security scanning
+   - Code coverage reporting
 
 ### Recommended Development Order
 
@@ -199,164 +311,40 @@ Types:
 
 Examples:
 
-```
-feature/PAT-123-add-user-authentication
-bugfix/PAT-456-fix-login-issue
-hotfix/PAT-789-security-patch
-```
-
-### Commit Message Format
-
-Follow the conventional commit format:
-
-```
-<type>(<scope>): <ticket-number> <description>
-
-[optional body]
-
-[optional footer]
-```
-
-Types:
-
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes
-- `refactor`: Code refactoring
-- `test`: Adding or modifying tests
-- `chore`: Maintenance tasks
-
-Examples:
-
-```
-feat(auth): PAT-123 implement user authentication
-fix(api): PAT-456 resolve login timeout issue
-docs(readme): PAT-789 update installation instructions
-```
+- `feature/PF-123-add-donation-form`
+- `bugfix/PF-456-fix-login-error`
+- `hotfix/PF-789-security-patch`
 
 ## 🧪 Testing
 
 ### Running Tests
 
-- Run all tests:
+1. **All Tests**
 
 ```bash
-npm run test
+npm test
 ```
 
-- Run tests in watch mode:
+2. **Watch Mode**
 
 ```bash
 npm run test:watch
 ```
 
-- Run tests with coverage:
+3. **Coverage Report**
 
 ```bash
 npm run test:coverage
 ```
 
-- Test specific file:
+### Test Structure
 
-```bash
-npm run test:file src/components/Button.test.tsx
-```
+- Unit tests: `*.test.tsx`
+- Component tests: `*.test.tsx`
+- Integration tests: `*.test.tsx`
+- E2E tests: `*.test.tsx`
 
-### Test Coverage Requirements
-
-- Minimum coverage: 80%
-- Minimum test success rate: 90%
-- All new features must include tests
-- All bug fixes must include tests
-
-## 📝 Code Quality
-
-### Linting
-
-- Run linter:
-
-```bash
-npm run lint
-```
-
-- Fix linting issues:
-
-```bash
-npm run lint:fix
-```
-
-- Lint specific file:
-
-```bash
-npm run lint:file src/components/Button.tsx
-```
-
-### Formatting
-
-- Format all files:
-
-```bash
-npm run format
-```
-
-- Check formatting:
-
-```bash
-npm run format:check
-```
-
-- Format specific file:
-
-```bash
-npm run format:file src/components/Button.tsx
-```
-
-### SonarQube Analysis
-
-- Run analysis:
-
-```bash
-npm run sonar
-```
-
-Quality Gates:
-
-- Code coverage: ≥ 80%
-- Duplicated lines: ≤ 3%
-- Code smells: ≤ 100
-- Bugs: ≤ 10
-- Vulnerabilities: ≤ 5
-
-## 🔄 Git Workflow
-
-1. **Pre-commit Checks**:
-
-   - Linting
-   - Formatting
-   - Tests
-   - SonarQube analysis
-
-2. **Pre-push Checks**:
-   - All pre-commit checks
-   - Full test suite
-   - Complete SonarQube analysis
-
-## 📚 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run test` - Run Jest tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage
-- `npm run storybook` - Start Storybook
-- `npm run build-storybook` - Build Storybook
-- `npm run quality` - Run all quality checks
-- `npm run sonar` - Run SonarQube analysis
-
-## 🤝 Contributing
+## 📝 Contributing
 
 1. Fork the repository
 2. Create your feature branch
@@ -366,4 +354,4 @@ Quality Gates:
 
 ## 📄 License
 
-[Your License]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

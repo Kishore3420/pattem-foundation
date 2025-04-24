@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Run quality checks
-npm run quality
-
-# Run lint-staged
+# Run lint-staged first to format files
 npx lint-staged
+
+# Run quality checks after formatting
+npm run quality

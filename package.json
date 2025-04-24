@@ -30,13 +30,14 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
       "prettier --write",
+      "eslint --fix",
       "jest --bail --findRelatedTests"
     ],
-    "*.{json,md}": [
+    "*.{json,md,css,scss,html,yml,yaml}": [
       "prettier --write"
-    ]
+    ],
+    "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@types/axios": "^0.9.36",

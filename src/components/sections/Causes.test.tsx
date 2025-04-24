@@ -86,28 +86,30 @@ describe('Causes Component', () => {
   });
 
   it('renders custom causes when provided', () => {
-    const customCauses = [
+    const mockCustomCauses = [
       {
         title: 'Custom Cause 1',
         description: 'Custom description 1',
-        image: '/images/custom1.jpg',
-        raised: 100000,
-        goal: 200000,
+        image: '/custom-image-1.jpg',
+        raised: 50000,
+        goal: 100000,
       },
       {
         title: 'Custom Cause 2',
         description: 'Custom description 2',
-        image: '/images/custom2.jpg',
-        raised: 150000,
-        goal: 300000,
+        image: '/custom-image-2.jpg',
+        raised: 75000,
+        goal: 100000,
       },
     ];
 
-    render(<Causes causes={customCauses} />);
+    render(<Causes causes={mockCustomCauses} />);
 
-    customCauses.forEach(cause => {
+    mockCustomCauses.forEach(cause => {
       expect(screen.getByText(cause.title)).toBeInTheDocument();
       expect(screen.getByText(cause.description)).toBeInTheDocument();
+      const progress = Math.round((cause.raised / cause.goal) * 100);
+      expect(screen.getByText(`${progress}% Funded`)).toBeInTheDocument();
       expect(screen.getByRole('img', { name: cause.title })).toHaveAttribute('src', cause.image);
     });
 
