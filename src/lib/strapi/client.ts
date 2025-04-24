@@ -82,4 +82,4 @@ export const deleteAPI = async (path: string, options = {}) => {
   }
 };
 
-export default strapiClient; 
+export default strapiClient;

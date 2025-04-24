@@ -80,4 +80,4 @@ export const Disabled: Story = {
     disabled: true,
     children: 'Button',
   },
-}; 
+};
