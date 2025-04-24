@@ -20,6 +20,9 @@ const customJestConfig = {
     '!src/**/*.stories.{js,jsx,ts,tsx}',
     '!src/**/*.test.{js,jsx,ts,tsx}',
     '!src/**/index.{js,jsx,ts,tsx}',
+    '!src/mocks/**/*.{js,jsx,ts,tsx}',
+    '!src/lib/strapi/**/*.{js,jsx,ts,tsx}',
+    '!src/services/strapi/**/*.{js,jsx,ts,tsx}',
   ],
   passWithNoTests: true,
 };
