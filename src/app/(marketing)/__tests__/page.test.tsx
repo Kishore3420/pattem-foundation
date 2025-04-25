@@ -2,23 +2,23 @@ import { render, screen } from '@testing-library/react';
 import Home from '../page';
 
 // Mock the components used in the page
-jest.mock('@/components/layout/Header', () => ({
+jest.mock('@/components/templates/layout/Header', () => ({
   Header: () => <div data-testid="mock-header">Header Component</div>,
 }));
 
-jest.mock('@/components/layout/Footer', () => ({
+jest.mock('@/components/templates/layout/Footer', () => ({
   Footer: () => <div data-testid="mock-footer">Footer Component</div>,
 }));
 
-jest.mock('@/components/sections/Banner', () => ({
+jest.mock('@/components/templates/sections/Banner', () => ({
   Banner: () => <div data-testid="mock-banner">Banner Component</div>,
 }));
 
-jest.mock('@/components/sections/Causes', () => ({
+jest.mock('@/components/templates/sections/Causes', () => ({
   Causes: () => <div data-testid="mock-causes">Causes Component</div>,
 }));
 
-jest.mock('@/components/sections/Impact', () => ({
+jest.mock('@/components/templates/sections/Impact', () => ({
   Impact: () => <div data-testid="mock-impact">Impact Component</div>,
 }));
 

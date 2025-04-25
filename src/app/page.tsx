@@ -1,7 +1,7 @@
-import { Banner } from '@/components/sections/Banner';
-import { Causes } from '@/components/sections/Causes';
-import Team from '@/components/sections/Team';
-import { Footer } from '@/components/sections/Footer';
+import { Banner } from '@/components/templates/sections/Banner';
+import { Causes } from '@/components/templates/sections/Causes';
+import Team from '@/components/templates/sections/Team';
+import { Footer } from '@/components/templates/layout/Footer';
 
 export default function Home() {
   return (

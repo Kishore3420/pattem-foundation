@@ -13,7 +13,7 @@ jest.mock('next/image', () => ({
 }));
 
 // Mock Button component
-jest.mock('@/components/Button/Button', () => ({
+jest.mock('@/components/atoms/Button/Button', () => ({
   Button: ({
     children,
     variant,
