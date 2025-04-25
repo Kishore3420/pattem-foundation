@@ -13,16 +13,22 @@ jest.mock('next/image', () => ({
 }));
 
 // Mock Button component
-jest.mock('@/components/ui/Button', () => ({
+jest.mock('@/components/Button/Button', () => ({
   Button: ({
     children,
     variant,
     size,
+    'data-testid': testId,
   }: {
     children: React.ReactNode;
     variant: string;
-    size: string;
-  }) => <button data-testid={`button-${variant}-${size}`}>{children}</button>,
+    size?: string;
+    'data-testid'?: string;
+  }) => (
+    <button data-testid={testId} className={`button-${variant} button-${size}`}>
+      {children}
+    </button>
+  ),
 }));
 
 describe('Banner Component', () => {

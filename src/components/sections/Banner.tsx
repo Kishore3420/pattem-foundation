@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/Button/Button';
 import Image from 'next/image';
 
 export const Banner = () => {
