@@ -40,7 +40,7 @@ export const Banner = () => {
         >
           <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
             <Image
-              src="/images/banner-image.jpg"
+              src="/images/banner-image.webp"
               alt="App screenshot"
               width={2432}
               height={1442}
