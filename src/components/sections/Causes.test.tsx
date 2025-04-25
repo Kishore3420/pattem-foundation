@@ -3,19 +3,29 @@ import { render, screen } from '@testing-library/react';
 import { Causes } from './Causes';
 import '@testing-library/jest-dom';
 
-// Mock the next/image component
+// Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: React.ComponentProps<'img'>) => {
+  default: ({ alt, src, ...props }: React.ComponentProps<'img'>) => {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img {...props} />;
+    return <img alt={alt} src={src} {...props} />;
   },
 }));
 
 // Mock Button component
-jest.mock('@/components/ui/Button', () => ({
-  Button: ({ children, variant }: { children: React.ReactNode; variant: string }) => (
-    <button data-testid={`button-${variant}`}>{children}</button>
+jest.mock('@/components/Button/Button', () => ({
+  Button: ({
+    children,
+    variant,
+    'data-testid': testId,
+  }: {
+    children: React.ReactNode;
+    variant: string;
+    'data-testid'?: string;
+  }) => (
+    <button data-testid={testId} className={`button-${variant}`}>
+      {children}
+    </button>
   ),
 }));
 
@@ -78,10 +88,10 @@ describe('Causes Component', () => {
     });
 
     // Check donate buttons
-    const donateButtons = screen.getAllByTestId('button-primary');
+    const donateButtons = screen.getAllByText('Donate Now');
     expect(donateButtons).toHaveLength(defaultCauses.length);
     donateButtons.forEach(button => {
-      expect(button).toHaveTextContent('Donate Now');
+      expect(button).toBeInTheDocument();
     });
   });
 

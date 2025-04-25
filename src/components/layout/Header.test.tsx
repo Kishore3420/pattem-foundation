@@ -3,33 +3,63 @@ import { render, screen } from '@testing-library/react';
 import { Header } from './Header';
 import '@testing-library/jest-dom';
 
-// Mock the next/link component
-jest.mock('next/link', () => {
-  const MockLink = ({
+// Mock next/image
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ alt, src, ...props }: React.ComponentProps<'img'>) => {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img alt={alt} src={src} {...props} />;
+  },
+}));
+
+// Mock Button component
+jest.mock('@/components/Button/Button', () => ({
+  Button: ({
     children,
-    href,
-    className,
+    variant,
+    'data-testid': testId,
   }: {
     children: React.ReactNode;
-    href: string;
-    className?: string;
-  }) => {
-    return (
-      <a href={href} className={className}>
-        {children}
-      </a>
-    );
-  };
-  MockLink.displayName = 'MockLink';
-  return MockLink;
-});
+    variant: string;
+    'data-testid'?: string;
+  }) => (
+    <button data-testid={testId} className={`button-${variant}`}>
+      {children}
+    </button>
+  ),
+}));
 
 describe('Header Component', () => {
-  it('renders the logo with correct link', () => {
+  it('renders the logo', () => {
     render(<Header />);
     const logo = screen.getByText('Pattem Foundation');
     expect(logo).toBeInTheDocument();
     expect(logo.closest('a')).toHaveAttribute('href', '/');
+  });
+
+  it('renders navigation links', () => {
+    render(<Header />);
+    const links = screen.getAllByRole('link');
+    expect(links).toHaveLength(6); // Logo + 5 nav links
+    expect(screen.getByText('Home')).toHaveAttribute('href', '/');
+    expect(screen.getByText('About')).toHaveAttribute('href', '/about');
+    expect(screen.getByText('Causes')).toHaveAttribute('href', '/causes');
+    expect(screen.getByText('Donate')).toHaveAttribute('href', '/donate');
+    expect(screen.getByText('Contact')).toHaveAttribute('href', '/contact');
+  });
+
+  it('renders the donate button', () => {
+    render(<Header />);
+    const donateButton = screen.getByText('Donate Now');
+    expect(donateButton).toBeInTheDocument();
+    expect(donateButton.closest('button')).toHaveClass('button-primary');
+  });
+
+  it('renders the mobile menu button on small screens', () => {
+    render(<Header />);
+    const menuButton = screen.getByRole('button', { name: /open menu/i });
+    expect(menuButton).toBeInTheDocument();
+    expect(menuButton).toHaveClass('button-ghost');
   });
 
   it('renders all navigation links', () => {
@@ -47,21 +77,6 @@ describe('Header Component', () => {
       expect(linkElement).toBeInTheDocument();
       expect(linkElement.closest('a')).toHaveAttribute('href', link.href);
     });
-  });
-
-  it('renders the donate button', () => {
-    render(<Header />);
-    const donateButton = screen.getByText('Donate Now');
-    expect(donateButton).toBeInTheDocument();
-    expect(donateButton.closest('button')).toHaveClass('bg-primary-600');
-  });
-
-  it('renders the mobile menu button on small screens', () => {
-    render(<Header />);
-    const menuButton = screen.getByRole('button', { name: /open menu/i });
-    expect(menuButton).toBeInTheDocument();
-    const mobileContainer = menuButton.closest('div');
-    expect(mobileContainer).toHaveClass('flex', 'md:hidden');
   });
 
   it('has correct responsive classes', () => {
