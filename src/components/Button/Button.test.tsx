@@ -100,4 +100,40 @@ describe('Button Component', () => {
     const button = screen.getByRole('button');
     expect(button).toHaveClass('transition-colors');
   });
+
+  it('renders as a toggle button', () => {
+    render(
+      <Button isToggle isActive>
+        Toggle
+      </Button>
+    );
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('renders as a disabled button', () => {
+    render(<Button disabled>Disabled</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass('disabled:opacity-50');
+    expect(button).toHaveClass('disabled:cursor-not-allowed');
+  });
+
+  it('renders with custom aria-label', () => {
+    render(<Button aria-label="Custom Label">Button</Button>);
+    const button = screen.getByRole('button', { name: 'Custom Label' });
+    expect(button).toBeInTheDocument();
+  });
+
+  it('renders with custom className', () => {
+    render(<Button className="custom-class">Custom</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('custom-class');
+  });
+
+  it('renders with motion animation props', () => {
+    render(<Button>Animated</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+  });
 });

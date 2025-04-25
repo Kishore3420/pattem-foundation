@@ -56,8 +56,8 @@ describe('Team Component', () => {
 
     images.forEach((image, index) => {
       const teamMembers = [
-        { name: 'John Doe', imageUrl: '/team/john-doe.jpg' },
-        { name: 'Jane Smith', imageUrl: '/team/jane-smith.jpg' },
+        { name: 'John Doe', imageUrl: '/team/john-doe.webp' },
+        { name: 'Jane Smith', imageUrl: '/team/jane-smith.webp' },
       ];
 
       expect(image).toHaveAttribute('src', teamMembers[index].imageUrl);
@@ -109,12 +109,12 @@ describe('Team Component', () => {
       {
         name: 'Custom Member 1',
         role: 'Custom Role 1',
-        imageUrl: '/team/custom1.jpg',
+        imageUrl: '/team/custom1.webp',
       },
       {
         name: 'Custom Member 2',
         role: 'Custom Role 2',
-        imageUrl: '/team/custom2.jpg',
+        imageUrl: '/team/custom2.webp',
       },
     ];
 
@@ -131,8 +131,8 @@ describe('Team Component', () => {
     // Check if custom team member images are rendered
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(2);
-    expect(images[0]).toHaveAttribute('src', '/team/custom1.jpg');
-    expect(images[1]).toHaveAttribute('src', '/team/custom2.jpg');
+    expect(images[0]).toHaveAttribute('src', '/team/custom1.webp');
+    expect(images[1]).toHaveAttribute('src', '/team/custom2.webp');
   });
 
   it('renders team member cards with correct structure', () => {

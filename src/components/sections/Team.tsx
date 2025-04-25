@@ -14,12 +14,12 @@ const defaultPeople: TeamMember[] = [
   {
     name: 'John Doe',
     role: 'Founder / CEO',
-    imageUrl: '/team/john-doe.jpg',
+    imageUrl: '/team/john-doe.webp',
   },
   {
     name: 'Jane Smith',
     role: 'Co-Founder / CTO',
-    imageUrl: '/team/jane-smith.jpg',
+    imageUrl: '/team/jane-smith.webp',
   },
   // Add more team members as needed
 ];

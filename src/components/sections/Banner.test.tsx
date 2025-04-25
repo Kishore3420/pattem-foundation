@@ -69,7 +69,7 @@ describe('Banner Component', () => {
     render(<Banner />);
     const image = screen.getByAltText('App screenshot');
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', '/images/banner-image.jpg');
+    expect(image).toHaveAttribute('src', '/images/banner-image.webp');
   });
 
   it('has correct layout structure', () => {
