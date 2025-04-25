@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { Banner } from '@/components/sections/Banner';
-import { Causes } from '@/components/sections/Causes';
-import { Impact } from '@/components/sections/Impact';
+import { Header } from '@/components/templates/layout/Header';
+import { Footer } from '@/components/templates/layout/Footer';
+import { Banner } from '@/components/templates/sections/Banner';
+import { Causes } from '@/components/templates/sections/Causes';
+import { Impact } from '@/components/templates/sections/Impact';
 
 export default function Home() {
   return (

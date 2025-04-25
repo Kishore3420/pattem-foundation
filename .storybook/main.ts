@@ -1,7 +1,14 @@
 import type { StorybookConfig } from '@storybook/nextjs';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: [
+    '../src/components/atoms/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/components/molecules/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/components/organisms/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/components/templates/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/components/pages/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/**/*.mdx',
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',

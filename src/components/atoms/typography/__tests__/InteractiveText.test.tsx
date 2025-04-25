@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Link, CopyableText, TextWithIcon } from '../InteractiveText';
 
 describe('Link', () => {
@@ -56,14 +56,32 @@ describe('Link', () => {
     expect(screen.getByText('Danger link')).toHaveClass('text-red-600');
   });
 
-  it('renders with icon', () => {
-    render(
+  it('renders with icon in different positions', () => {
+    const { rerender } = render(
       <Link href="#" variant="icon" icon="→">
         Link with icon
       </Link>
     );
-    const linkElement = screen.getByRole('link');
+    let linkElement = screen.getByRole('link');
     expect(linkElement).toHaveTextContent('Link with icon→');
+
+    rerender(
+      <Link href="#" variant="icon" icon="→" iconPosition="left">
+        Link with left icon
+      </Link>
+    );
+    linkElement = screen.getByRole('link');
+    expect(linkElement).toHaveTextContent('→Link with left icon');
+  });
+
+  it('applies custom className', () => {
+    render(
+      <Link href="#" className="custom-class">
+        Custom styled link
+      </Link>
+    );
+    const link = screen.getByText('Custom styled link');
+    expect(link).toHaveClass('custom-class');
   });
 });
 
@@ -72,9 +90,14 @@ describe('CopyableText', () => {
     writeText: jest.fn(),
   };
   Object.assign(navigator, { clipboard: mockClipboard });
+  const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    consoleSpy.mockRestore();
   });
 
   it('renders with default state', () => {
@@ -93,6 +116,37 @@ describe('CopyableText', () => {
 
     expect(mockClipboard.writeText).toHaveBeenCalledWith('Copy me');
     expect(await screen.findByText('✓ Copied!')).toBeInTheDocument();
+
+    // Wait for the copied state to reset
+    await waitFor(
+      () => {
+        expect(screen.queryByText('✓ Copied!')).not.toBeInTheDocument();
+      },
+      { timeout: 2500 }
+    );
+  });
+
+  it('handles clipboard error', async () => {
+    const error = new Error('Clipboard error');
+    mockClipboard.writeText.mockRejectedValueOnce(error);
+
+    const { container } = render(<CopyableText text="Copy me">Click to copy</CopyableText>);
+    const copyButton = container.querySelector('.cursor-pointer');
+    fireEvent.click(copyButton!);
+
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith('Failed to copy text:', error);
+    });
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <CopyableText text="Copy me" className="custom-class">
+        Custom styled text
+      </CopyableText>
+    );
+    const wrapper = container.firstChild;
+    expect(wrapper).toHaveClass('custom-class');
   });
 });
 

@@ -15,6 +15,90 @@ A modern Next.js application with TypeScript, Tailwind CSS, Strapi CMS integrati
 - **Commit Linting**: Commitlint
 - **Code Analysis**: SonarQube
 
+## 🏗️ Component Architecture
+
+We follow Atomic Design principles for organizing our components:
+
+### Atoms (Basic Building Blocks)
+
+Located in `src/components/atoms/`:
+
+- **Typography**: Text components with various styles and variants
+  - Typography: Base text component
+  - Blockquote: Styled blockquote component
+  - ContextualText: Specialized text components (Highlighted, Price, Legal, Divider)
+  - DefinitionList: Structured definition lists
+  - InteractiveText: Interactive text components (Link, CopyableText, TextWithIcon)
+  - List: Ordered and unordered lists
+  - TextModifiers: Text styling modifiers
+- **Button**: Reusable button components with variants
+- **Icons**: Basic icon components and sets
+- **Media**: Basic media components (images, videos, audio)
+
+### Molecules (Component Combinations)
+
+Located in `src/components/molecules/`:
+
+- **Forms**: Form-related components combining atoms
+  - Form groups
+  - Input groups
+  - Form sections
+- **Data Display**: Data presentation components
+  - Data cards
+  - Statistics displays
+  - Info boxes
+- **Feedback**: User feedback components
+  - Alerts
+  - Notifications
+  - Progress indicators
+
+### Organisms (Complex Components)
+
+Located in `src/components/organisms/`:
+
+- **Tables**: Complex table components
+  - Data tables
+  - Sortable tables
+  - Paginated tables
+- **Carousels**: Slideshow components
+  - Image carousels
+  - Content carousels
+  - Testimonial carousels
+- **Charts**: Data visualization components
+  - Line charts
+  - Bar charts
+  - Pie charts
+- **Modals**: Dialog components
+  - Dialog modals
+  - Form modals
+  - Confirmation modals
+
+### Templates (Page Layouts)
+
+Located in `src/components/templates/`:
+
+- **Layout**: Page layout components
+  - Header
+  - Footer
+  - Navigation
+- **Sections**: Page section templates
+  - Banner sections
+  - Cause sections
+  - Team sections
+  - Impact sections
+- **Overlays**: Overlay templates
+  - Modal overlays
+  - Loading overlays
+  - Notification overlays
+
+### Pages (Complete Pages)
+
+Located in `src/app/`:
+
+- Marketing pages
+- Dashboard pages
+- Authentication pages
+
 ## 💻 Developer Setup
 
 ### Required Tools
@@ -142,35 +226,40 @@ npm run storybook
 
 ```
 src/
-├── app/                    # Next.js app directory (pages and routes)
-│   ├── (auth)/            # Authentication routes
-│   ├── (dashboard)/       # Dashboard routes
-│   ├── (marketing)/       # Marketing pages
-│   └── api/               # API routes
-├── components/            # Reusable components
-│   ├── ui/               # Basic UI components (buttons, inputs, etc.)
-│   ├── layout/           # Layout components (header, footer, etc.)
-│   ├── forms/            # Form components
-│   └── sections/         # Page sections (banner, team, causes, etc.)
-├── features/             # Feature-specific components and logic
-│   ├── auth/            # Authentication related components
-│   ├── dashboard/       # Dashboard related components
-│   └── marketing/       # Marketing related components
-├── modules/             # Reusable modules
-│   ├── api/            # API integration modules
-│   ├── auth/           # Authentication modules
-│   └── utils/          # Utility modules
-├── lib/                # Core libraries and utilities
-│   ├── api/           # API client setup
-│   ├── auth/          # Authentication utilities
-│   └── utils/         # General utilities
-├── services/          # Service layer
-│   ├── api/          # API services
-│   └── auth/         # Authentication services
-├── styles/           # Global styles and Tailwind config
-├── types/            # TypeScript type definitions
-├── mocks/            # Mock data for development and testing
-└── tests/            # Test utilities and setup
+├── app/                      # Next.js app directory (pages and routes)
+│   ├── (auth)/              # Authentication routes
+│   ├── (dashboard)/         # Dashboard routes
+│   ├── (marketing)/         # Marketing pages
+│   └── api/                 # API routes
+├── components/              # Reusable components (Atomic Design)
+│   ├── atoms/              # Basic building blocks
+│   │   ├── typography/     # Text components
+│   │   ├── Button/        # Button components
+│   │   ├── icons/         # Icon components
+│   │   └── media/         # Media components
+│   ├── molecules/         # Combinations of atoms
+│   │   ├── forms/        # Form-related components
+│   │   ├── data-display/ # Data presentation components
+│   │   └── feedback/     # User feedback components
+│   ├── organisms/        # Complex components
+│   │   ├── tables/      # Table components
+│   │   ├── carousels/   # Carousel components
+│   │   ├── charts/      # Chart components
+│   │   └── modals/      # Modal components
+│   └── templates/        # Page templates
+│       ├── layout/      # Layout components
+│       ├── sections/    # Page sections
+│       └── overlays/    # Overlay components
+├── lib/                 # Core libraries and utilities
+│   ├── api/            # API client setup
+│   ├── auth/           # Authentication utilities
+│   └── utils/          # General utilities
+├── services/           # Service layer
+│   ├── api/           # API services
+│   └── strapi/        # Strapi CMS integration
+├── styles/            # Global styles and Tailwind config
+├── types/             # TypeScript type definitions
+└── tests/             # Test utilities and setup
 ```
 
 ## 🎯 Development Workflow
@@ -343,6 +432,69 @@ npm run test:coverage
 - Component tests: `*.test.tsx`
 - Integration tests: `*.test.tsx`
 - E2E tests: `*.test.tsx`
+
+## 📊 Quality Metrics
+
+### Test Coverage
+
+We maintain 100% test coverage across all components:
+
+```
+-------------------------------|---------|----------|---------|---------|
+File                           | % Stmts | % Branch | % Funcs | % Lines |
+-------------------------------|---------|----------|---------|---------|
+All files                      |     100 |      100 |     100 |     100 |
+```
+
+### Component Testing Strategy
+
+1. **Atoms**
+
+   - Unit tests for all variants and props
+   - Accessibility testing
+   - Style and className testing
+   - Event handler testing
+
+2. **Molecules**
+
+   - Integration tests for atom combinations
+   - State management testing
+   - User interaction testing
+   - Error handling testing
+
+3. **Organisms**
+
+   - Complex integration testing
+   - Data flow testing
+   - Performance testing
+   - Edge case handling
+
+4. **Templates**
+
+   - Layout testing
+   - Responsive design testing
+   - Component composition testing
+   - Section arrangement testing
+
+5. **Pages**
+   - End-to-end testing
+   - Route testing
+   - Data fetching testing
+   - SEO testing
+
+### Quality Checks
+
+Run the following command to check code quality:
+
+```bash
+npm run quality
+```
+
+This will:
+
+1. Run ESLint for code style
+2. Execute all tests with coverage reporting
+3. Check formatting with Prettier
 
 ## 📝 Contributing
 
