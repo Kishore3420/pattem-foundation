@@ -6,9 +6,14 @@ import '@testing-library/jest-dom';
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ alt, src, ...props }: React.ComponentProps<'img'> & { priority?: boolean }) => {
+  default: ({
+    alt,
+    src,
+    priority,
+    ...props
+  }: React.ComponentProps<'img'> & { priority?: boolean }) => {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img alt={alt} src={src} {...props} />;
+    return <img alt={alt} src={src} data-priority={priority} {...props} />;
   },
 }));
 

@@ -1,105 +1,82 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type HighlightVariant = 'warning' | 'info' | 'success';
-type PriceVariant = 'default' | 'discounted' | 'large';
-type LegalTextVariant = 'copyright' | 'terms' | 'fine-print';
-type DividerVariant = 'or' | 'section';
-
 interface HighlightedTextProps {
-  variant?: HighlightVariant;
-  className?: string;
   children: React.ReactNode;
+  className?: string;
 }
 
 interface PriceTextProps {
   amount: number;
-  variant?: PriceVariant;
+  currency?: string;
   className?: string;
+  size?: 'sm' | 'md' | 'lg';
 }
 
 interface LegalTextProps {
-  variant?: LegalTextVariant;
-  className?: string;
   children: React.ReactNode;
+  className?: string;
+  variant?: 'warning' | 'info' | 'success';
 }
 
 interface TextDividerProps {
-  variant?: DividerVariant;
-  text?: string;
+  text: string;
   className?: string;
 }
 
-const HighlightedText: React.FC<HighlightedTextProps> = ({
-  variant = 'info',
-  className,
-  children,
-}) => {
-  const baseStyles = 'px-2 py-1 rounded';
-
-  const variantStyles = {
-    warning: 'bg-yellow-100 text-yellow-800',
-    info: 'bg-blue-100 text-blue-800',
-    success: 'bg-green-100 text-green-800',
-  };
-
-  const classes = twMerge(baseStyles, variantStyles[variant], className);
-
-  return <mark className={classes}>{children}</mark>;
-};
-
-const PriceText: React.FC<PriceTextProps> = ({ amount, variant = 'default', className }) => {
-  const baseStyles = 'font-mono';
-
-  const variantStyles = {
-    default: 'text-gray-900',
-    discounted: 'text-gray-500 line-through',
-    large: 'text-2xl font-bold text-gray-900',
-  };
-
-  const classes = twMerge(baseStyles, variantStyles[variant], className);
-
-  const formattedAmount = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(amount);
-
-  return <span className={classes}>{formattedAmount}</span>;
-};
-
-const LegalText: React.FC<LegalTextProps> = ({ variant = 'copyright', className, children }) => {
-  const baseStyles = '';
-
-  const variantStyles = {
-    copyright: 'text-sm text-gray-600',
-    terms: 'text-sm text-blue-600 hover:underline',
-    'fine-print': 'text-xs text-gray-500',
-  };
-
-  const classes = twMerge(baseStyles, variantStyles[variant], className);
-
-  return <span className={classes}>{children}</span>;
-};
-
-const TextDivider: React.FC<TextDividerProps> = ({ variant = 'or', text, className }) => {
-  const baseStyles = 'flex items-center gap-4';
-
-  const variantStyles = {
-    or: 'text-gray-500 text-sm',
-    section: 'text-gray-700 font-medium',
-  };
-
-  const classes = twMerge(baseStyles, variantStyles[variant], className);
-
-  const dividerText = text || (variant === 'or' ? 'OR' : 'Continue with');
-
+export const HighlightedText: React.FC<HighlightedTextProps> = ({ children, className }) => {
   return (
-    <div className={classes}>
-      <div className="flex-1 h-px bg-gray-200" />
-      <span>{dividerText}</span>
-      <div className="flex-1 h-px bg-gray-200" />
-    </div>
+    <span
+      className={twMerge(
+        'bg-yellow-100 text-yellow-800 px-2 py-1 rounded-md font-medium',
+        className
+      )}
+    >
+      {children}
+    </span>
   );
 };
 
-export { HighlightedText, PriceText, LegalText, TextDivider };
+export const PriceText: React.FC<PriceTextProps> = ({
+  amount,
+  currency = '₹',
+  className,
+  size = 'md',
+}) => {
+  const sizeClasses = {
+    sm: 'text-sm',
+    md: 'text-base',
+    lg: 'text-lg',
+  };
+
+  return (
+    <span className={twMerge('font-semibold text-gray-900', sizeClasses[size], className)}>
+      {currency}
+      {amount.toLocaleString('en-IN')}
+    </span>
+  );
+};
+
+export const LegalText: React.FC<LegalTextProps> = ({ children, className, variant = 'info' }) => {
+  const variantClasses = {
+    warning: 'text-amber-600 bg-amber-50',
+    info: 'text-blue-600 bg-blue-50',
+    success: 'text-green-600 bg-green-50',
+  };
+
+  return (
+    <p className={twMerge('text-sm p-3 rounded-md', variantClasses[variant], className)}>
+      {children}
+    </p>
+  );
+};
+
+export const TextDivider: React.FC<TextDividerProps> = ({ text, className }) => {
+  return (
+    <div className={twMerge('flex items-center', className)}>
+      <div className="flex-grow border-t border-gray-300" />
+      <span className="mx-4 text-sm text-gray-500">{text}</span>
+      <div className="flex-grow border-t border-gray-300" />
+    </div>
+  );
+};

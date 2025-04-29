@@ -11,11 +11,9 @@ jest.mock('next/font/google', () => ({
 describe('RootLayout', () => {
   it('renders with correct structure and classes', () => {
     const { container } = render(
-      <div id="__next">
-        <RootLayout>
-          <div data-testid="child">Test Content</div>
-        </RootLayout>
-      </div>
+      <RootLayout>
+        <div data-testid="child">Test Content</div>
+      </RootLayout>
     );
 
     const body = container.querySelector('body');

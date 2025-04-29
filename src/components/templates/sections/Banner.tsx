@@ -45,7 +45,7 @@ export const Banner = () => {
               width={2432}
               height={1442}
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
-              priority
+              priority={true}
             />
           </div>
         </div>
