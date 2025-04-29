@@ -29,10 +29,31 @@ describe('Typography', () => {
 
   it('applies different colors', () => {
     const { rerender } = render(<Typography color="primary">Primary text</Typography>);
-    expect(screen.getByText('Primary text')).toHaveClass('text-gray-900');
+    expect(screen.getByText('Primary text')).toHaveClass('text-primary');
 
-    rerender(<Typography color="error">Error text</Typography>);
-    expect(screen.getByText('Error text')).toHaveClass('text-red-600');
+    rerender(<Typography color="secondary">Secondary text</Typography>);
+    expect(screen.getByText('Secondary text')).toHaveClass('text-secondary');
+
+    rerender(<Typography color="tertiary">Tertiary text</Typography>);
+    expect(screen.getByText('Tertiary text')).toHaveClass('text-tertiary');
+
+    rerender(<Typography color="danger">Danger text</Typography>);
+    expect(screen.getByText('Danger text')).toHaveClass('text-danger');
+
+    rerender(<Typography color="warning">Warning text</Typography>);
+    expect(screen.getByText('Warning text')).toHaveClass('text-warning');
+
+    rerender(<Typography color="info">Info text</Typography>);
+    expect(screen.getByText('Info text')).toHaveClass('text-info');
+
+    rerender(<Typography color="neutral">Neutral text</Typography>);
+    expect(screen.getByText('Neutral text')).toHaveClass('text-neutral');
+
+    rerender(<Typography color="light">Light text</Typography>);
+    expect(screen.getByText('Light text')).toHaveClass('text-light');
+
+    rerender(<Typography color="white">White text</Typography>);
+    expect(screen.getByText('White text')).toHaveClass('text-white');
   });
 
   it('applies different alignments', () => {
@@ -68,7 +89,7 @@ describe('Typography', () => {
 
     const element = screen.getByText('Combined styles');
     expect(element).toHaveClass('font-bold');
-    expect(element).toHaveClass('text-gray-900');
+    expect(element).toHaveClass('text-primary');
     expect(element).toHaveClass('text-center');
     expect(element).toHaveClass('text-lg');
     expect(element).toHaveClass('italic');

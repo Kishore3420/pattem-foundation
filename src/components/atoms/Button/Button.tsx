@@ -1,15 +1,24 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { IconType } from 'react-icons';
 import { twMerge } from 'tailwind-merge';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'outline'
+  | 'ghost'
+  | 'link';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
-export type ButtonShape = 'rounded' | 'square' | 'circle';
+export type ButtonShape = 'rounded' | 'square' | 'circle' | 'pill';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   shape?: ButtonShape;
@@ -20,6 +29,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   isIconOnly?: boolean;
   isToggle?: boolean;
   isActive?: boolean;
+  children?: React.ReactNode;
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -30,17 +40,22 @@ const sizeStyles: Record<ButtonSize, string> = {
 };
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-primary-600 text-white hover:bg-primary-700',
-  secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-  outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50',
-  ghost: 'text-gray-700 hover:bg-gray-100',
-  link: 'text-primary-600 hover:underline',
+  primary: 'bg-primary text-white hover:bg-primary-700 focus:ring-primary-500',
+  secondary: 'bg-secondary text-white hover:bg-secondary-700 focus:ring-secondary-500',
+  tertiary: 'bg-tertiary text-white hover:bg-tertiary-700 focus:ring-tertiary-500',
+  danger: 'bg-danger text-white hover:bg-danger-700 focus:ring-danger-500',
+  warning: 'bg-warning text-white hover:bg-warning-700 focus:ring-warning-500',
+  info: 'bg-info text-white hover:bg-info-700 focus:ring-info-500',
+  outline: 'border-2 border-primary text-primary hover:bg-primary-50 focus:ring-primary-500',
+  ghost: 'text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-500',
+  link: 'text-primary hover:underline focus:ring-primary-500',
 };
 
 const shapeStyles: Record<ButtonShape, string> = {
   rounded: 'rounded-md',
   square: 'rounded-none',
   circle: 'rounded-full',
+  pill: 'rounded-full',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -65,7 +80,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+      'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
     const buttonStyles = twMerge(
       baseStyles,
       sizeStyles[size],

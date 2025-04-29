@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
-import { FiMail, FiArrowRight, FiTrash, FiCheck, FiPlus } from 'react-icons/fi';
+import { FiMail, FiArrowRight, FiTrash, FiPlus, FiAlertTriangle, FiInfo } from 'react-icons/fi';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -14,7 +14,8 @@ const meta: Meta<typeof Button> = {
         'secondary',
         'tertiary',
         'danger',
-        'success',
+        'warning',
+        'info',
         'outline',
         'ghost',
         'link',
@@ -22,7 +23,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg', 'xl'],
     },
     shape: {
       control: 'select',
@@ -35,9 +36,6 @@ const meta: Meta<typeof Button> = {
       control: 'boolean',
     },
     isIconOnly: {
-      control: 'boolean',
-    },
-    isSplit: {
       control: 'boolean',
     },
     isToggle: {
@@ -82,11 +80,19 @@ export const Danger: Story = {
   },
 };
 
-export const Success: Story = {
+export const Warning: Story = {
   args: {
-    children: 'Save',
-    variant: 'success',
-    leftIcon: FiCheck,
+    children: 'Warning',
+    variant: 'warning',
+    leftIcon: FiAlertTriangle,
+  },
+};
+
+export const Info: Story = {
+  args: {
+    children: 'Info',
+    variant: 'info',
+    leftIcon: FiInfo,
   },
 };
 
@@ -133,6 +139,13 @@ export const Large: Story = {
   },
 };
 
+export const ExtraLarge: Story = {
+  args: {
+    children: 'Extra Large Button',
+    size: 'xl',
+  },
+};
+
 // Shapes
 export const Square: Story = {
   args: {
@@ -152,6 +165,14 @@ export const Pill: Story = {
   args: {
     children: 'Pill Button',
     shape: 'pill',
+  },
+};
+
+export const Circle: Story = {
+  args: {
+    children: <FiPlus />,
+    shape: 'circle',
+    isIconOnly: true,
   },
 };
 
@@ -214,13 +235,5 @@ export const ToggleActive: Story = {
     children: 'Toggle',
     isToggle: true,
     isActive: true,
-  },
-};
-
-// Split Button
-export const Split: Story = {
-  args: {
-    children: 'Split Button',
-    isSplit: true,
   },
 };

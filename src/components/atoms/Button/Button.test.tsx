@@ -7,24 +7,36 @@ describe('Button Component', () => {
     render(<Button>Click me</Button>);
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('bg-primary-600'); // primary variant
+    expect(button).toHaveClass('bg-primary'); // primary variant
   });
 
   it('renders with different variants', () => {
     const { rerender } = render(<Button variant="primary">Primary</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-primary-600');
+    expect(screen.getByRole('button')).toHaveClass('bg-primary');
 
     rerender(<Button variant="secondary">Secondary</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-gray-200');
+    expect(screen.getByRole('button')).toHaveClass('bg-secondary');
+
+    rerender(<Button variant="tertiary">Tertiary</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-tertiary');
+
+    rerender(<Button variant="danger">Danger</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-danger');
+
+    rerender(<Button variant="warning">Warning</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-warning');
+
+    rerender(<Button variant="info">Info</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-info');
 
     rerender(<Button variant="outline">Outline</Button>);
-    expect(screen.getByRole('button')).toHaveClass('border-primary-600');
+    expect(screen.getByRole('button')).toHaveClass('border-primary');
 
     rerender(<Button variant="ghost">Ghost</Button>);
-    expect(screen.getByRole('button')).toHaveClass('text-gray-700');
+    expect(screen.getByRole('button')).toHaveClass('text-neutral-700');
 
     rerender(<Button variant="link">Link</Button>);
-    expect(screen.getByRole('button')).toHaveClass('text-primary-600');
+    expect(screen.getByRole('button')).toHaveClass('text-primary');
   });
 
   it('renders with different sizes', () => {
@@ -49,6 +61,9 @@ describe('Button Component', () => {
     expect(screen.getByRole('button')).toHaveClass('rounded-none');
 
     rerender(<Button shape="circle">Circle</Button>);
+    expect(screen.getByRole('button')).toHaveClass('rounded-full');
+
+    rerender(<Button shape="pill">Pill</Button>);
     expect(screen.getByRole('button')).toHaveClass('rounded-full');
   });
 

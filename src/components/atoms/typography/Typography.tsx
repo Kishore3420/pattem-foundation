@@ -3,7 +3,16 @@ import { twMerge } from 'tailwind-merge';
 
 type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type FontWeight = 'light' | 'regular' | 'semibold' | 'bold';
-type TextColor = 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'disabled';
+type TextColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'neutral'
+  | 'light'
+  | 'white';
 type TextAlign = 'left' | 'center' | 'right' | 'justify';
 type TextSize = 'small' | 'regular' | 'large';
 type TextStyle = 'italic' | 'underline' | 'strikethrough';
@@ -41,12 +50,15 @@ const Typography: React.FC<TypographyProps> = ({
   };
 
   const colorStyles = {
-    primary: 'text-gray-900',
-    secondary: 'text-gray-600',
-    success: 'text-green-600',
-    error: 'text-red-600',
-    warning: 'text-yellow-600',
-    disabled: 'text-gray-400',
+    primary: 'text-primary',
+    secondary: 'text-secondary',
+    tertiary: 'text-tertiary',
+    danger: 'text-danger',
+    warning: 'text-warning',
+    info: 'text-info',
+    neutral: 'text-neutral',
+    light: 'text-light',
+    white: 'text-white',
   };
 
   const alignStyles = {

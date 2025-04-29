@@ -14,7 +14,6 @@ interface HighlightedTextProps {
 
 interface PriceTextProps {
   amount: number;
-  currency?: string;
   variant?: PriceVariant;
   className?: string;
 }
@@ -49,12 +48,7 @@ const HighlightedText: React.FC<HighlightedTextProps> = ({
   return <mark className={classes}>{children}</mark>;
 };
 
-const PriceText: React.FC<PriceTextProps> = ({
-  amount,
-  currency = '$',
-  variant = 'default',
-  className,
-}) => {
+const PriceText: React.FC<PriceTextProps> = ({ amount, variant = 'default', className }) => {
   const baseStyles = 'font-mono';
 
   const variantStyles = {

@@ -16,7 +16,17 @@ const meta: Meta<typeof Typography> = {
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'success', 'error', 'warning', 'disabled'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'danger',
+        'warning',
+        'info',
+        'neutral',
+        'light',
+        'white',
+      ],
     },
     align: {
       control: 'select',
@@ -128,10 +138,15 @@ export const Colors: Story = {
     <div className="space-y-4">
       <Typography color="primary">Primary text</Typography>
       <Typography color="secondary">Secondary text</Typography>
-      <Typography color="success">Success text</Typography>
-      <Typography color="error">Error text</Typography>
+      <Typography color="tertiary">Tertiary text</Typography>
+      <Typography color="danger">Danger text</Typography>
       <Typography color="warning">Warning text</Typography>
-      <Typography color="disabled">Disabled text</Typography>
+      <Typography color="info">Info text</Typography>
+      <Typography color="neutral">Neutral text</Typography>
+      <Typography color="light">Light text</Typography>
+      <Typography color="white" className="bg-neutral p-2">
+        White text
+      </Typography>
     </div>
   ),
 };
